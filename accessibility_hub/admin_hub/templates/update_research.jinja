@@ -1,0 +1,26 @@
+{% extends "tailwind_loader.jinja" %}
+{% block content %}
+    <div class="max-w-4xl p-6 mx-auto bg-white rounded-md dark:bg-gray-800">
+        <h2 class="text-2xl mb-4 text-center font-semibold text-gray-700 capitalize dark:text-white">Update onderzoek</h2>
+        <form action="/admin_hub/update-researchstatus/{{ research.id }}" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <div class="mt-6 flex items-center justify-end gap-x-6">
+                <div class="flex justify-end mt-6">
+                    <a href="{% url 'researches' %}">
+                        <button type="button"
+                                class="px-8 py-2.5 leading-5 border border-gray-300 text-red-600 transition-colors duration-300 transform rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+                            Terug
+                        </button>
+                    </a>
+                </div>
+                <div class="flex justify-end mt-6">
+                    <button type="submit"
+                            class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+                        Wijzigen
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}

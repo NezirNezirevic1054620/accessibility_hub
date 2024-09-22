@@ -1,0 +1,122 @@
+{% extends "tailwind_loader.jinja" %}
+{% block content %}
+<section class="mt-20 max-w-4xl p-6 mx-auto bg-white dark:bg-gray-800">
+    <h2 class="text-lg font-semibold text-center text-gray-700 capitalize dark:text-white mb-6">Uw Profiel instellingen</h2>
+    <!-- Personal Information Section -->
+    <div class="mb-6">
+        <div class="divide-y">
+            <h3 class="text-3xl font-semibold text-gray-700 capitalize dark:text-white mb-2">Persoonlijke Informatie</h3>
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="username">Gebruikersnaam</label>
+                    <input id="username" value="{{ user.username }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="emailAddress">E-mail adres</label>
+                    <input id="emailAddress" value="{{ user.email }}" type="email"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="password">Voornaam</label>
+                    <input id="firstname" value="{{ user.first_name }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Achternaam</label>
+                    <input id="lastname" value="{{ user.last_name }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Datum aanmelding</label>
+                    <input id="lastname" value="{{ user.date_joined|date }}" disabled type="text"
+                        class=" disabled:bg-gray-200 block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+            </div>
+        </div>
+        <div class="divide-y">
+            <h3 class="text-3xl mt-10 mb-2 font-semibold text-gray-700 capitalize dark:text-white">Ervaringsdeskundige informatie</h3>
+            {% for experience_expert in profile %}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="password">Type beperking</label>
+                    <input id="firstname" value="{{ experience_expert.type_beperking }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Gebruikte hulpmiddelen</label>
+                    <input id="lastname" value="{{ experience_expert.gebruikte_hulpmiddelen }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="password">Bijzonderheden</label>
+                    <input id="firstname" value="{{ experience_expert.bijzonderheden }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="divide-y">
+            <h3 class="text-3xl mt-10 mb-2 font-semibold text-gray-700 capitalize dark:text-white">Voogd/Toezichthouder informatie</h3>
+            {% for experience_expert in profile %}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Uw toezichthouder</label>
+                    <input id="lastname" value="{{ experience_expert.naam_voogd_toezichthouder }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Email toezichthouder</label>
+                    <input id="lastname" value="{{ experience_expert.email_voogd_toezichthouder }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Gebruikte hulpmiddelen</label>
+                    <input id="lastname" value="{{ experience_expert.tel_voogd_toezichthouder }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="divide-y">
+            <h3 class="text-3xl mt-10 mb-2 font-semibold text-gray-700 capitalize dark:text-white">Onderzoek informatie</h3>
+            {% for experience_expert in profile %}
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Type onderzoek</label>
+                    <input id="lastname" value="{{ experience_expert.type_onderzoek }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div class="mt-10">
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Voorkeur van benadering</label>
+                    <input id="lastname" value="{{ experience_expert.voorkeur_benadering }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+                <div>
+                    <label class="text-gray-700 dark:text-gray-200" for="passwordConfirmation">Bijzonderheden beschikbaarheid</label>
+                    <input id="lastname" value="{{ experience_expert.bijzonderheden_beschikbaarheid }}" type="text"
+                        class="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring">
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- Action Buttons -->
+    <div class=" flex items-center justify-end gap-x-6">
+        <div class="flex justify-end">
+            <a href="{% url 'experience_expert_dashboard' %}">
+            <button type="button"
+                class="px-8 py-2.5 leading-5 border border-gray-300 text-red-600 transition-colors duration-300 transform rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200">
+            Terug
+            </button>
+            </a>
+        </div>
+        <div class="flex justify-end">
+            <button type="submit"
+                class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">
+            Opslaan
+            </button>
+        </div>
+    </div>
+</section>
+{% endblock %}

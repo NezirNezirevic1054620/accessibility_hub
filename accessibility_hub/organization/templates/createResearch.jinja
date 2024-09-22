@@ -1,0 +1,66 @@
+{% extends "tailwind_loader.jinja" %}
+{% block content %}
+<div class="max-w-4xl p-6 mx-auto bg-white rounded-md dark:bg-gray-800">
+    <h2 class="text-2xl mb-4 text-center font-semibold text-gray-700 capitalize dark:text-white">Maak je onderzoek aan</h2>
+    <form action="/organization/create-research" method="POST">
+        {% csrf_token %}
+        {{ form }}
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+            <div class="flex justify-end mt-6">
+                <a href="/">
+                    <button type="button" class="px-8 py-2.5 leading-5 border border-gray-300 text-red-600 transition-colors duration-300 transform rounded-md hover:bg-gray-200 focus:outline-none focus:bg-gray-200">Terug</button>
+                </a>
+            </div>
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:bg-blue-700">Registreren</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+//Alle ids die nodig zijn.
+const startDate = document.getElementById("startDate")
+const endDate = document.getElementById("endDate")
+const typeResearch = document.getElementById("typeResearch")
+const locations = document.getElementById("location")
+const showReward = document.getElementById("showReward")
+const reward = document.getElementById("reward")
+
+//Zorgt ervoor dat de start datum niet voor de dag dat het nu is gezet kan worden.
+const today = new Date()
+let date = {
+    "day": String(today.getDate()).padStart(2, '0'),
+    "month": String(today.getMonth()+1).padStart(2, '0'),
+    "year": today.getFullYear()
+}
+startDate.min = `${date["year"]}-${date["month"]}-${date["day"]}`
+
+//Ik kon de checked niet aanpassen in de form het was standaard checked.
+showReward.checked = false
+
+//Als de startdatum word veranderd checkt de function of er een einddatum is zo ja checked die ook of de einddatum eerder is of niet.
+startDate.onchange = () => {
+    if(endDate.value.length === 0){
+        endDate.disabled = false
+    }
+    else if(new Date(startDate.value) > new Date(endDate.value)){
+        endDate.value = ""
+        alert("De datum die u nu invoert is over de einddatum voer een nieuwe einddatum in.")
+    }
+    endDate.min = startDate.value
+}
+
+//Als het type onderzoek word veranderd checked de function of het locactie is zo ja zal de locatie input niet meer disabled zijn.
+typeResearch.onchange = () => {
+    locations.value = ""
+    locations.disabled = (typeResearch.value === "locatie") ? false : true
+}
+
+//Als de checkbox van met beloning word aangeklikt zal dit checken of die aan staat en op basis daarvan is de beloningtextarea typebaar.
+showReward.onchange = () => {
+    reward.value = ""
+    reward.disabled = (showReward.checked) ? false : true
+}
+</script>
+{% endblock %}

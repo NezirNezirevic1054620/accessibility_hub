@@ -1,0 +1,187 @@
+{
+	"info": {
+		"_postman_id": "aabbabe4-6115-40d7-b15c-42d918445f82",
+		"name": "AccessibilityHub API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15230291"
+	},
+	"item": [
+		{
+			"name": "Ervaringsdeskundige",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"",
+							"pm.test(\"Response status code is 200\", function () {",
+							"  pm.expect(pm.response.code).to.equal(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"Response has the Content-Type header set to application/json\", function () {",
+							"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");",
+							"});",
+							"",
+							"",
+							"pm.test(\"Email is in a valid format\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    responseData.forEach(function(item) {",
+							"        pm.expect(item.email).to.be.a('string').and.to.match(/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/);",
+							"    });",
+							"});",
+							"",
+							"",
+							"pm.test(\"Toezichthouder field is a boolean value\", function () {",
+							"    const responseData = pm.response.json();",
+							"    ",
+							"    pm.expect(responseData).to.be.an('array');",
+							"    responseData.forEach(function(item) {",
+							"        pm.expect(item.toezichthouder).to.be.a('boolean');",
+							"    });",
+							"});",
+							"",
+							"var template = `",
+							"<style type=\"text/css\">",
+							"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}",
+							"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}",
+							"    .tftable tr {background-color:#ffffff;}",
+							"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}",
+							"    .tftable tr:hover {background-color:#e0ffff;}",
+							"</style>",
+							"",
+							"<table class=\"tftable\" border=\"1\">",
+							"    <tr>",
+							"        <th>ID</th>",
+							"        <th>Voornaam</th>",
+							"        <th>Achternaam</th>",
+							"        <th>Email</th>",
+							"        <th>Postcode</th>",
+							"        <th>Geslacht</th>",
+							"        <th>Tel Nummer</th>",
+							"        <th>Geboortedatum</th>",
+							"        <th>Type Beperking</th>",
+							"        <th>Gebruikte Hulpmiddelen</th>",
+							"        <th>Bijzonderheden</th>",
+							"        <th>Toezichthouder</th>",
+							"        <th>Naam Voogd Toezichthouder</th>",
+							"        <th>Email Voogd Toezichthouder</th>",
+							"        <th>Tel Voogd Toezichthouder</th>",
+							"        <th>Voorkeur Benadering</th>",
+							"        <th>Type Onderzoek</th>",
+							"        <th>Bijzonderheden Beschikbaarheid</th>",
+							"        <th>Status</th>",
+							"    </tr>",
+							"    ",
+							"    {{#each response}}",
+							"        <tr id=row_{{@key}}>",
+							"            <td>{{id}}</td>",
+							"            <td>{{voornaam}}</td>",
+							"            <td>{{achternaam}}</td>",
+							"            <td>{{email}}</td>",
+							"            <td>{{postcode}}</td>",
+							"            <td>{{geslacht}}</td>",
+							"            <td>{{tel_nummer}}</td>",
+							"            <td>{{geboortedatum}}</td>",
+							"            <td>{{type_beperking}}</td>",
+							"            <td>{{gebruikte_hulpmiddelen}}</td>",
+							"            <td>{{bijzonderheden}}</td>",
+							"            <td>{{toezichthouder}}</td>",
+							"            <td>{{naam_voogd_toezichthouder}}</td>",
+							"            <td>{{email_voogd_toezichthouder}}</td>",
+							"            <td>{{tel_voogd_toezichthouder}}</td>",
+							"            <td>{{voorkeur_benadering}}</td>",
+							"            <td>{{type_onderzoek}}</td>",
+							"            <td>{{bijzonderheden_beschikbaarheid}}</td>",
+							"            <td>{{status}}</td>",
+							"        </tr>",
+							"    {{/each}}",
+							"</table>",
+							"`;",
+							"",
+							"function constructVisualizerPayload() {",
+							"    return {response: pm.response.json()}",
+							"}",
+							"",
+							"pm.visualizer.set(template, constructVisualizerPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/experience_experts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"experience_experts"
+					]
+				},
+				"description": "This endpoint makes an HTTP GET request to retrieve a list of experience experts. The response will be in JSON format and will contain an array of objects, each representing an experience expert. The objects will include various attributes such as id, voornaam, achternaam, email, postcode, geslacht, tel_nummer, geboortedatum, type_beperking, gebruikte_hulpmiddelen, bijzonderheden, toezichthouder, naam_voogd_toezichthouder, email_voogd_toezichthouder, tel_voogd_toezichthouder, voorkeur_benadering, type_onderzoek, bijzonderheden_beschikbaarheid, and status."
+			},
+			"response": []
+		},
+		{
+			"name": "Onderzoek aanmaken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"titel\": \"test\",\n    \"beschikbaar\": 0,\n    \"beschrijving\": \"testonderzoek\",\n    \"datum_vanaf\": \"2024-03-08 08:00:00\",\n    \"datum_tot\": \"2024-03-12 08:00:00\",\n    \"type_onderzoek\": \"online\",\n    \"locatie\": \"Rotterdam\",\n    \"met_beloning\": 1,\n    \"beloning\": \"Prijs\",\n    \"doelgroep_leeftijd_van\": 30,\n    \"doelgroep_leeftijd_tot\": 40,\n    \"doelgroep_beperking\": \"Blind\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/create_research/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"create_research",
+						""
+					]
+				},
+				"description": "### Create Research\n\nThis endpoint allows you to create a new research entry.\n\n**HTTP Request**  \n`POST http://localhost:8000/api/create_research/`\n\n**Request Body**\n\n- `titel` (string): The title of the research.\n- `beschikbaar` (number): The availability status of the research.\n- `beschrijving` (string): The description of the research.\n- `datum_vanaf` (string): The start date of the research.\n- `datum_tot` (string): The end date of the research.\n- `type_onderzoek` (string): The type of research.\n- `locatie` (string): The location of the research.\n- `met_beloning` (number): The reward availability status.\n- `beloning` (string): The reward offered for the research.\n- `doelgroep_leeftijd_van` (number): The minimum age of the target audience.\n- `doelgroep_leeftijd_tot` (number): The maximum age of the target audience.\n- `doelgroep_beperking` (string): The restriction or limitation of the target audience.\n    \n\n**Response**\n\n- Status: 201\n- Content-Type: application/json\n- `titel` (string): The title of the research.\n- `beschikbaar` (boolean): The availability status of the research.\n- `beschrijving` (string): The description of the research.\n- `datum_vanaf` (string): The start date of the research.\n- `datum_tot` (string): The end date of the research.\n- `type_onderzoek` (string): The type of research.\n- `locatie` (string): The location of the research.\n- `met_beloning` (boolean): The reward availability status.\n- `beloning` (string): The reward offered for the research.\n- `doelgroep_leeftijd_van` (number): The minimum age of the target audience.\n- `doelgroep_leeftijd_tot` (number): The maximum age of the target audience.\n- `doelgroep_beperking` (string): The restriction or limitation of the target audience."
+			},
+			"response": []
+		},
+		{
+			"name": "Organisaties",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/organisations/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"organisations",
+						""
+					]
+				},
+				"description": "This API endpoint makes an HTTP GET request to retrieve a list of organisations. The response will be in JSON format and will include an array of objects, each representing an organisation with its respective details such as ID, company name, type, website, description, contact person, email, phone number, and other details."
+			},
+			"response": []
+		}
+	]
+}

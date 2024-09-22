@@ -1,0 +1,100 @@
+{% extends "sidebar_admin.jinja" %}
+{% block content %}
+<div class="divide-y">
+    <h3 class="text-4xl mb-2 font-semibold text-gray-700 capitalize dark:text-white">Welkom {{ user.username }}</h3>
+        <div class="grid grid-cols-3 gap-4">
+        <div class="max-w-2xl mt-10 px-8 py-4 bg-white rounded-lg border dark:bg-gray-800">
+            <!-- Card content -->
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"></path>
+                </svg>
+
+                <div class="ml-4">
+                    <p class="text-2xl font-semibold text-gray-700 dark:text-gray-300">{{ researches|length }}</p>
+                    <p class="text-gray-500 dark:text-gray-400">Onderzoeken</p>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <!-- Card 2 -->
+        <div class="max-w-2xl mt-10 px-8 py-4 bg-white rounded-lg border dark:bg-gray-800">
+            <!-- Card content -->
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z"></path>
+                </svg>
+                <div class="ml-4">
+                    <p class="text-2xl font-semibold text-gray-700 dark:text-gray-300">{{ organisations|length }}</p>
+                    <p class="text-gray-500 dark:text-gray-400">Organisaties</p>
+                </div>
+            </div>
+        </div>
+
+    <div class="max-w-2xl px-8 mt-10 py-4 bg-white rounded-lg border dark:bg-gray-800">
+            <!-- Card content -->
+            <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"></path>
+                </svg>
+
+
+                <div class="ml-4">
+                    <p class="text-2xl font-semibold text-gray-700 dark:text-gray-300">{{ experience_experts|length }}</p>
+                    <p class="text-gray-500 dark:text-gray-400">Ervaringsdeskundigen</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <div class="max-w-full px-8 py-4 mt-4 bg-white rounded-lg border dark:bg-gray-800">
+        <h2 class="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Takenlijst</h2>
+        <button id="add-task-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Voeg een taak toe</button>
+
+        <!-- Modal -->
+        <div id="task-modal" class="hidden fixed inset-0 z-50 overflow-auto bg-gray-800 bg-opacity-50 flex justify-center items-center">
+            <div class="bg-white p-8 rounded-lg">
+                <h2 class="text-lg font-semibold mb-4">Voeg een taak toe</h2>
+                <input type="text" id="task-input" class="border rounded-lg p-2 w-full mb-4" placeholder="Voer in de naam van uw taak in">
+                <button id="submit-task-btn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg">Toevoegen</button>
+            </div>
+        </div>
+    <ul id="todo-list" class="mt-2 mb-2">
+        <!-- Existing Tasks -->
+    </ul>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const addTaskBtn = document.getElementById("add-task-btn");
+            const taskModal = document.getElementById("task-modal");
+            const submitTaskBtn = document.getElementById("submit-task-btn");
+            const taskInput = document.getElementById("task-input");
+            const todoList = document.getElementById("todo-list");
+
+            addTaskBtn.addEventListener("click", function() {
+                taskModal.classList.remove("hidden");
+            });
+
+            submitTaskBtn.addEventListener("click", function() {
+                const taskText = taskInput.value.trim();
+                if (taskText !== "") {
+                    const taskItem = document.createElement("li");
+                    taskItem.textContent = taskText;
+                    taskItem.classList.add("text-gray-700", "dark:text-gray-300");
+                    todoList.appendChild(taskItem);
+                    taskInput.value = "";
+                    taskModal.classList.add("hidden");
+                }
+            });
+        });
+    </script>
+
+{% endblock %}

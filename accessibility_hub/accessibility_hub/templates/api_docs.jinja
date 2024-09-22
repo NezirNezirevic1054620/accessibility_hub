@@ -1,0 +1,159 @@
+{% extends "tailwind_loader.jinja" %}
+{% block content %}
+<body class="font-sans bg-gray-100 text-gray-900">
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <div class="bg-gray-800 text-gray-100 w-64 flex flex-col justify-between">
+            <div class="p-4">
+                <h1 class="text-xl font-bold mb-4">API Documentation</h1>
+                <!-- Sidebar links -->
+                <ul>
+                    <li class="mb-2">
+                        <a href="#organizations-api" class="hover:text-gray-200">GET /api/organizations</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#experience-experts-api" class="hover:text-gray-200">GET /api/experience-experts</a>
+                    </li>
+                    <li class="mb-2">
+                        <a href="#organizations-api" class="hover:text-gray-200">POST /api/create_research</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="p-4">
+                <!-- Search bar -->
+                <input type="text" placeholder="Search..." class="bg-gray-700 text-gray-100 rounded-md px-4 py-2 w-full">
+            </div>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 overflow-y-auto">
+            <div class="container mx-auto px-8 py-12">
+                <!-- Example API endpoint: GET /api/organizations -->
+                <div id="organizations-api" class="bg-white rounded-lg shadow-md px-6 py-4 mb-8">
+                    <h2 class="text-2xl font-bold mb-2">GET /api/organizations</h2>
+                    <p class="text-lg text-gray-700 mb-4">
+                        Verkijg alle organisaties
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        This endpoint retrieves a listof all organizations.
+                        The response includes basic organization information such as ID, name, and type of company.
+                    </p>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Request</h3>
+                        <p class="text-gray-700 mb-2">Method: <span class="font-semibold">GET</span></p>
+                        <p class="text-gray-700 mb-2">Parameters:</p>
+                        <ul class="list-disc list-inside mb-4">
+                            <li class="text-gray-700">None</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Response</h3>
+                        <p class="text-gray-700 mb-2">Status Code: <span class="font-semibold">200 OK</span></p>
+                        <pre class="bg-gray-200 p-2 rounded-md text-gray-700"><code>[
+   {
+        "id": 1,
+        "bedrijfsnaam": "Tech Solutions BV",
+        "type_bedrijf": "Commerciëel",
+        "website": "https://www.techsolutions.com",
+        "beschrijving": "Tech Solutions is een toonaangevend
+                            technologiebedrijf dat oplossingen biedt voor diverse industrieën.",
+        "contactpersoon": "Anne de Vriesie",
+        "email": "anne@techsolutions.com",
+        "telefoonnummer": "0612345678",
+        "Overige_details": "Geen bijzonderheden"
+    },
+    ...
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example API endpoint: GET /api/experience-experts -->
+                <div id="experience-experts-api" class="bg-white rounded-lg shadow-md px-6 py-4 mb-8">
+                    <h2 class="text-2xl font-bold mb-2">GET /api/experience-experts</h2>
+                    <p class="text-lg text-gray-700 mb-4">
+                        Verkrijg alle ervaringsdeskundigen
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        Dit endpoint verkrijgt alle ervaringsdeskundigen
+                    </p>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Request</h3>
+                        <p class="text-gray-700 mb-2">Method: <span class="font-semibold">GET</span></p>
+                        <p class="text-gray-700 mb-2">Parameters:</p>
+                        <ul class="list-disc list-inside mb-4">
+                            <li class="text-gray-700">None</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Response</h3>
+                        <p class="text-gray-700 mb-2">Status Code: <span class="font-semibold">200 OK</span></p>
+                        <pre class="bg-gray-200 p-2 rounded-md text-gray-700"><code>[
+    {
+        "id": 21,
+        "voornaam": "Jan",
+        "achternaam": "Jansen",
+        "email": "jan@example.com",
+        "postcode": "1234AB",
+        "geslacht": "Man",
+        "tel_nummer": "0612345678",
+        "geboortedatum": "1990-05-15",
+        "type_beperking": "Doof",
+        "gebruikte_hulpmiddelen": "Gebarentaal",
+        "bijzonderheden": "Geen bijzonderheden",
+        "toezichthouder": true,
+        "naam_voogd_toezichthouder": "Piet Jansen",
+        "email_voogd_toezichthouder": "piet@example.com",
+        "tel_voogd_toezichthouder": "0612345679",
+        "voorkeur_benadering": "telefonisch",
+        "type_onderzoek": "telefonisch",
+        "bijzonderheden_beschikbaarheid": "Altijd beschikbaar",
+        "status": "in_behandeling"
+    },
+    ...
+]</code></pre>
+                    </div>
+                </div>
+
+                <!-- Example API endpoint: GET /api/experience-experts -->
+                <div id="experience-experts-api" class="bg-white rounded-lg shadow-md px-6 py-4 mb-8">
+                    <h2 class="text-2xl font-bold mb-2">POST /api/create_research</h2>
+                    <p class="text-lg text-gray-700 mb-4">
+                        Maak een onderzoek aan
+                    </p>
+                    <p class="text-gray-700 mb-4">
+                        Dit endpoint maak een onderzoek aan met een POST request
+                    </p>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Request</h3>
+                        <p class="text-gray-700 mb-2">Method: <span class="font-semibold">POST</span></p>
+                        <p class="text-gray-700 mb-2">Parameters:</p>
+                        <ul class="list-disc list-inside mb-4">
+                            <li class="text-gray-700">None</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">Response</h3>
+                        <p class="text-gray-700 mb-2">Status Code: <span class="font-semibold">201 Created</span></p>
+                        <pre class="bg-gray-200 p-2 rounded-md text-gray-700"><code>[
+    {
+    "titel": "test",
+    "beschikbaar": false,
+    "beschrijving": "testonderzoek",
+    "datum_vanaf": "2024-03-08T08:00:00Z",
+    "datum_tot": "2024-03-12T08:00:00Z",
+    "type_onderzoek": "online",
+    "locatie": "Rotterdam",
+    "met_beloning": true,
+    "beloning": "Prijs",
+    "doelgroep_leeftijd_van": 30,
+    "doelgroep_leeftijd_tot": 40,
+    "doelgroep_beperking": "Blind"
+}
+    ...
+]</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}
