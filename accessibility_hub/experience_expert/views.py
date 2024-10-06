@@ -1,3 +1,5 @@
+import secrets
+
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -70,10 +72,6 @@ class Create(generic.CreateView, SuccessMessageMixin):
     template_name = "add.jinja"
     model = ExperienceExpert
 
-    def get(self, request, *args, **kwargs):
-        form = self.form_class
-        return render(request, self.template_name, context={"form": form})
-
     def post(self, request, *args, **kwargs):
         form = ExperienceExpertForm(request.POST)
         if form.is_valid():
@@ -81,10 +79,16 @@ class Create(generic.CreateView, SuccessMessageMixin):
             achternaam = request.POST["achternaam"]
             email = request.POST["email"]
 
-            hashed_email = bcrypt.hash(email)
+            # Generate a salt using Python's secrets module
+            salt = secrets.token_bytes(16)
 
+            # Hash the email with the generated salt using passlib's bcrypt
+            salted_email = salt + email.encode('utf-8')
+            hashed_email = bcrypt.hash(salted_email)
+
+            # Save the salted and hashed email to the experience expert object
             experience_expert = form.save(commit=False)
-            experience_expert.email = hashed_email
+            experience_expert.email = hashed_email  # Save hashed email
             experience_expert.save()
 
             subject = "Ervaringsdeskundige registratie"
