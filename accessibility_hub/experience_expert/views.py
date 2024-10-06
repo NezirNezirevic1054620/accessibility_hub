@@ -11,6 +11,7 @@ from organization.models import Research
 
 from .forms import ExperienceExpertForm, LoginForm
 from .models import ExperienceExpert
+from passlib.hash import bcrypt
 
 
 class Login(generic.View):
@@ -25,27 +26,36 @@ class Login(generic.View):
         if request.method == "POST":
             username = request.POST["username"]
             password = request.POST["password"]
-            user = authenticate(request, username=username, password=password)
 
-            if user is not None:
-                login(request, user)
+            try:
+                user = User.objects.get(username=username)
 
-                request.session["password"] = user.password
-                request.session["username"] = user.username
-                request.session["email"] = user.email
+                # Verify the password using passlib's bcrypt
+                if bcrypt.verify(password, user.password):
+                    login(request, user)
 
-                response = redirect("/experience_expert")
-                return response
+                    # Store non-sensitive data in session
+                    request.session["user_id"] = user.id
+                    request.session["username"] = user.username
+                    request.session["email"] = user.email
 
-            else:
-                messages.success(
+                    response = redirect("/experience_expert")
+                    return response
+                else:
+                    messages.error(
+                        request,
+                        "Uw gebruikersnaam of wachtwoord is onjuist, probeer het opnieuw"
+                    )
+                    return redirect("login")
+
+            except User.DoesNotExist:
+                messages.error(
                     request,
-                    message="Uw gebruikersnaam of wachtwoord is onjuist, probeer het opnieuw",
+                    "Gebruiker niet gevonden. Probeer het opnieuw."
                 )
                 return redirect("login")
 
-        else:
-            return render(request, self.template_name, context={})
+        return render(request, self.template_name, context={})
 
 
 class Logout(generic.View):
@@ -71,7 +81,10 @@ class Create(generic.CreateView, SuccessMessageMixin):
             achternaam = request.POST["achternaam"]
             email = request.POST["email"]
 
-            experience_expert = form.save()
+            hashed_email = bcrypt.hash(email)
+
+            experience_expert = form.save(commit=False)
+            experience_expert.email = hashed_email
             experience_expert.save()
 
             subject = "Ervaringsdeskundige registratie"
@@ -99,7 +112,7 @@ class Create(generic.CreateView, SuccessMessageMixin):
         else:
             messages.error(
                 request,
-                message="Er ging iets mis, uw formulier kon niet worden verzonde, probeer later opnieuw",
+                message="Er ging iets mis, uw formulier kon niet worden verzonden, probeer later opnieuw",
             )
             return render(request, self.template_name, context={"form": form})
 
